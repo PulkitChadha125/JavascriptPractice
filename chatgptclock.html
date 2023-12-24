@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <!-- Your navbar content -->
+</nav>
+
+<div class="container my-4">
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Current time is : <span id="time"></span></h1>
+            <p class="col-md-8 fs-4">We have got you covered, we will show the time in different countries</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#myCollapse">Browse Time</button>
+            <div class="collapse show" id="myCollapse">
+                <div class="card card-body">
+                    <select id="timezoneSelect" onchange="updateTimeZone()">
+                        <option value="UTC">UTC</option>
+                        <option value="America/New_York">America/New_York</option>
+                        <option value="Asia/Tokyo">Asia/Tokyo</option>
+                        <!-- Add more options for different time zones -->
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let date;
+    let time;
+    let timeZone = "UTC"; // Default time zone
+
+    const updateTime = () => {
+        let a = new Date();
+        let strTime = a.toLocaleDateString("en-US", { timeZone: `${timeZone}` });
+        let b = new Date().toLocaleString("en-US", { timeZone: `${timeZone}` });
+        
+        document.getElementById('time').innerHTML = b + "<br>on " + strTime;
+    }
+
+    const updateTimeZone = () => {
+        timeZone = document.getElementById('timezoneSelect').value;
+        updateTime(); // Update the time when the time zone changes
+    }
+
+    setInterval(updateTime, 1000); // Update time every second
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
